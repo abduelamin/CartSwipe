@@ -14,7 +14,7 @@ const HeroSection = ({ title, subtitle, image, link }) => {
           <br />
           <br />
           <a href={link} className="hero_link">
-            Discover More
+            Discover
           </a>
         </p>
       </div>
