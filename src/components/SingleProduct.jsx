@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../styles/SingleProduct.css";
 
 import product from "../../sampleproduct";
+import QuantityCount from "./QuantityCount";
 
 const SingleProduct = () => {
   const [pic, setPic] = useState("");
@@ -34,11 +35,7 @@ const SingleProduct = () => {
 
         <h2 className="quantity_title">Quantity:</h2>
         <div className="align_center quanitity_input">
-          <button className="quantity_input_button" disabled>
-            -
-          </button>
-          <p className="quantity_input_count">1</p>
-          <button className="quantity_input_button"> + </button>
+          <QuantityCount />
         </div>
 
         <button className="searh_button add_cart">Add to cart</button>
