@@ -4,22 +4,23 @@ import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 import "../styles/ProductCard.css";
 
-import iphonefront from "../assets/iphonefront.jpg";
-import iphone from "../assets/iphone.jpg";
+import { NavLink, useParams } from "react-router-dom";
 
-const ProductCard = ({ price, productName }) => {
+const ProductCard = ({ product }) => {
+  const { id } = useParams();
   return (
     <article className="product_card">
       <div className="product_image">
-        <a href="product1">
-          <img src={iphonefront} alt="product image" />
-        </a>
+        <NavLink to={`/product/${product.title}`}>
+          <img
+            src={`http://localhost:5000/products/${product.images[0]}`}
+            alt="product image"
+          />
+        </NavLink>
       </div>
       <div className="product_details">
-        {/* {price} <br />
-        {productName} */}
-        <h3 className="product_price">$999</h3>
-        <p className="product_title">iphone 14 Pro</p>
+        <h3 className="product_price">$ {product.price}</h3>
+        <p className="product_title">{product.title}</p>
 
         <footer className="align_center product_info_footer">
           <div className="align_center">
@@ -28,9 +29,9 @@ const ProductCard = ({ price, productName }) => {
                 icon={regularStar}
                 style={{ marginRight: "10%" }}
               />
-              5.0
+              {product.reviews.rate}
             </p>
-            <p className="product_review_count">120</p>
+            <p className="product_review_count">{product.reviews.counts}</p>
           </div>
 
           <button className="add_to_cart ">

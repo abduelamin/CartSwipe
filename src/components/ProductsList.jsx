@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/ProductsList.css";
 import ProductCard from "./ProductCard";
+import api from "../utils/api-client";
+
 const ProductsList = () => {
+  const [products, setProducts] = useState([]);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await api.get("/products");
+        setProducts(response.data.products);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   return (
     <section className="products_list_section">
       <header className="align_center products_list_header">
@@ -15,14 +32,10 @@ const ProductsList = () => {
         </select>
       </header>
       <div className="products_list">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {error && <em className="form_error">{error}</em>}
+        {products.map((product) => {
+          return <ProductCard product={product} key={product._id} />;
+        })}
       </div>
     </section>
   );

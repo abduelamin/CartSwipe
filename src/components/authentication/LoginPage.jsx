@@ -6,14 +6,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 const LoginPage = () => {
   const schema = z.object({
-    email: z
-      .string()
-      .email({ message: "Please write a valid email address" })
-      .min(20, { message: "not enough chars" }),
+    email: z.string().email({ message: "Please write a valid email address" }),
     password: z
       .string()
       .min(8, { message: "Password must be 8 characters or more" }),
   });
+
+  // I will add this option for when implementing user creation form.
+
+  // .refine((data) => (data.password = data.confirmPassword), {
+  //   message: "Passwords do not match",
+  //   path: [confirmPassword],
+  // });
   const { register, handleSubmit, formState } = useForm({
     resolver: zodResolver(schema),
   });

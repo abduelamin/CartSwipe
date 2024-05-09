@@ -27,7 +27,7 @@ const Navbar = () => {
         <NavLink to="/" className="align_center">
           Home
         </NavLink>
-        <NavLink to="/products">Products</NavLink>
+        <NavLink to="/Products">Products</NavLink>
         <NavLink to="login">Login</NavLink>
         <NavLink to="/myorders">My Orders</NavLink>
         <NavLink className="cart" to="/cart">

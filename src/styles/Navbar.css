@@ -43,6 +43,10 @@
   font-size: 20px;
 }
 
+.navbar_links > a.active {
+  font-weight: 600;
+}
+
 a {
   margin: 15px;
   text-decoration: none;
