@@ -6,6 +6,8 @@ import "../styles/ProductCard.css";
 
 import { NavLink, useParams } from "react-router-dom";
 
+// Review useParams() I need to dynamic render each URL by uing the id and not product.title
+
 const ProductCard = ({ product }) => {
   const { id } = useParams();
   return (

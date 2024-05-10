@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Sidebar.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
 import api from "../utils/api-client";
 
 const Sidebar = () => {
   const [category, setCategory] = useState([]);
   const [Error, setError] = useState("");
+
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // const getParam = searchParams.get("category");
 
   useEffect(() => {
     const fetchCategory = async () => {
@@ -28,7 +31,7 @@ const Sidebar = () => {
         {Error && <em style={{ color: "red" }}>{Error}</em>}
         {category.map((cat, index) => {
           return (
-            <NavLink to={`products/category/${cat.name}`} key={index}>
+            <NavLink to={`/products?category=${cat.name}`} key={index}>
               {cat.name}
             </NavLink>
           );

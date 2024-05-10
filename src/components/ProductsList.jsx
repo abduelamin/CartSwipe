@@ -2,22 +2,37 @@ import React, { useEffect, useState } from "react";
 import "../styles/ProductsList.css";
 import ProductCard from "./ProductCard";
 import api from "../utils/api-client";
+import { useSearchParams } from "react-router-dom";
+import Pagination from "./Pagination";
 
 const ProductsList = () => {
   const [products, setProducts] = useState([]);
+  const [mainDataObject, setMainDataObject] = useState("");
   const [error, setError] = useState("");
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const getParam = searchParams.get("category");
+  const page = searchParams.get("page");
+
+  const handlePageChange = (page) => {
+    const currentQueryURL = Object.fromEntries([...searchParams]);
+    setSearchParams({ ...currentQueryURL, page: page });
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await api.get("/products");
+        const response = await api.get("/products", {
+          params: { category: getParam, page: page },
+        });
         setProducts(response.data.products);
+        setMainDataObject(response.data);
       } catch (err) {
         setError(err.message);
       }
     };
     fetchProducts();
-  }, []);
+  }, [getParam, page]);
 
   return (
     <section className="products_list_section">
@@ -37,6 +52,14 @@ const ProductsList = () => {
           return <ProductCard product={product} key={product._id} />;
         })}
       </div>
+
+      {mainDataObject && (
+        <Pagination
+          totalPosts={mainDataObject.totalProducts}
+          postPerPage={8}
+          handleClick={handlePageChange}
+        />
+      )}
     </section>
   );
 };
