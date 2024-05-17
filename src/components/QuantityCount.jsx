@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/QuantityCount.css";
 const QuantityCount = () => {
+  const [count, setCount] = useState(0);
+
+  const handleIncrease = () => {
+    setCount((prev) => prev + 1);
+  };
+
+  const handleDecrease = () => {
+    setCount((prev) => prev - 1);
+  };
   return (
     <>
-      <button className="quantity_input_button" disabled>
-        -
+      {!count ? (
+        <button className="quantity_input_button" disabled>
+          -
+        </button>
+      ) : (
+        <button onClick={handleDecrease} className="quantity_input_button">
+          -
+        </button>
+      )}
+      <p className="quantity_input_count">{count}</p>
+      <button onClick={handleIncrease} className="quantity_input_button">
+        +
       </button>
-      <p className="quantity_input_count">1</p>
-      <button className="quantity_input_button"> + </button>
     </>
   );
 };

@@ -3,8 +3,11 @@ import { useForm } from "react-hook-form";
 import "./LoginPage.css";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Login } from "../../services/loginService";
 
 const LoginPage = () => {
+  const [loginError, setLoginError] = useState("");
+
   const schema = z.object({
     email: z.string().email({ message: "Please write a valid email address" }),
     password: z
@@ -12,18 +15,18 @@ const LoginPage = () => {
       .min(8, { message: "Password must be 8 characters or more" }),
   });
 
-  // I will add this option for when implementing user creation form.
-
-  // .refine((data) => (data.password = data.confirmPassword), {
-  //   message: "Passwords do not match",
-  //   path: [confirmPassword],
-  // });
   const { register, handleSubmit, formState } = useForm({
     resolver: zodResolver(schema),
   });
 
-  const submitForm = (formData) => {
-    console.log(formData);
+  // Login() is a service function I made that controls the post request. This was doen to keep the code clean.
+  const submitForm = async (formData) => {
+    try {
+      await Login(formData);
+    } catch (error) {
+      if (error.response.status === 400)
+        setLoginError(error.response.data.message);
+    }
   };
 
   return (
@@ -62,7 +65,9 @@ const LoginPage = () => {
                 {formState.errors.password.message}
               </em>
             )}
+            {loginError && <em className="form_error">{loginError}</em>}
           </div>
+
           <button type="submit" className="search_button form_submit">
             Submit
           </button>

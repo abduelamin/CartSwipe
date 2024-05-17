@@ -6,10 +6,14 @@ import { useSearchParams } from "react-router-dom";
 import Pagination from "./Pagination";
 
 const ProductsList = () => {
-  const [products, setProducts] = useState([]);
+  // This is access products server which gives details about all products i.e. total products, products themselves etc.. This is mainly used for our pagination component to determine the total products counts
   const [mainDataObject, setMainDataObject] = useState("");
+
+  // This for accessing the single products
+  const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
 
+  // Pagination needs to use the usesearchparams() and the config object in axios. we grab the search query and add it to the axios config obj therefore only making a request based on the page number. We can add more query to our search params using object.fromEntries.
   const [searchParams, setSearchParams] = useSearchParams();
   const getParam = searchParams.get("category");
   const page = searchParams.get("page");

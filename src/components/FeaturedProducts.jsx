@@ -18,12 +18,13 @@ const FeaturedProducts = () => {
     fetchProducts();
   }, []);
 
+  const featuredArray = [...products].splice(0, 3);
   return (
     <section className="featured_products">
       <h2>Featured Products</h2>
       <div className="featured_products_list align_center">
         {error && <em className="form_error">{error}</em>}
-        {products.map((product) => {
+        {featuredArray.map((product) => {
           return <ProductCard product={product} key={product._id} />;
         })}
       </div>

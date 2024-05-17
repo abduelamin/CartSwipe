@@ -27,8 +27,10 @@ const Navbar = () => {
         <NavLink to="/" className="align_center">
           Home
         </NavLink>
-        <NavLink to="/products">Products</NavLink>
+        {/* Unsure if products page should have a page 1*/}
+        <NavLink to="/products?page=1">Products</NavLink>
         <NavLink to="login">Login</NavLink>
+        <NavLink to="signup">Sign Up</NavLink>
         <NavLink to="/myorders">My Orders</NavLink>
         <NavLink className="cart" to="/cart">
           Cart
