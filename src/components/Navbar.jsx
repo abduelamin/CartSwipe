@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../styles/Navbar.css";
 import { NavLink } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
   // You will need to move this as a prop so that we can use statefunction when users clicks on add item
   const [cartCount, setCartCount] = useState(0);
 
@@ -29,15 +29,24 @@ const Navbar = () => {
         </NavLink>
         {/* Unsure if products page should have a page 1*/}
         <NavLink to="/products?page=1">Products</NavLink>
-        <NavLink to="login">Login</NavLink>
-        <NavLink to="signup">Sign Up</NavLink>
-        <NavLink to="/myorders">My Orders</NavLink>
-        <NavLink className="cart" to="/cart">
-          Cart
-          {cartCount ? (
-            <div className="cart_items align_center ">{cartCount}</div>
-          ) : null}
-        </NavLink>
+        {!user && (
+          <>
+            <NavLink to="login">Login</NavLink>
+            <NavLink to="signup">Sign Up</NavLink>
+          </>
+        )}
+        {user && (
+          <>
+            <NavLink to="logout">Log Out</NavLink>
+            <NavLink to="/myorders">My Orders</NavLink>
+            <NavLink className="cart" to="/cart">
+              Cart
+              {cartCount ? (
+                <div className="cart_items align_center ">{cartCount}</div>
+              ) : null}
+            </NavLink>
+          </>
+        )}
       </div>
     </nav>
   );

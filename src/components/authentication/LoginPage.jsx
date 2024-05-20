@@ -22,7 +22,10 @@ const LoginPage = () => {
   // Login() is a service function I made that controls the post request. This was doen to keep the code clean.
   const submitForm = async (formData) => {
     try {
-      await Login(formData);
+      const response = await Login(formData);
+      localStorage.setItem("token", response.data.token);
+      setLoginError(false); // This is to remove the error message once the user corrects its. Otherwise it will stay there forever.
+      window.location = "/"; // This takes the user to homepage once successful login occurs. This method does a re-render as opposed to useNavigate which just sends the user to the page. Here you can do many things i.e. welcome page etc..
     } catch (error) {
       if (error.response.status === 400)
         setLoginError(error.response.data.message);

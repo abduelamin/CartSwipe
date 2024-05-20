@@ -27,10 +27,13 @@ const SignupPage = () => {
       path: ["confirmPassword"],
     });
 
-  // Come back to this because error handling is not working well
+  // Signup() is a service function I made that controls the post request. This was doen to keep the code clean.
   const submitForm = async (formData) => {
     try {
-      await signUp(formData, pic);
+      const response = await signUp(formData, pic);
+      localStorage.setItem("token", response.data.token);
+      setFormError(false); // This is to remove the error message once the user corrects its. Otherwise it will stay there forever.
+      window.location = "/";
     } catch (err) {
       if (err.response.status === 400) {
         setFormError(err.response.data.message);
