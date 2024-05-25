@@ -6,7 +6,8 @@ import QuantityCount from "./QuantityCount";
 import { useParams } from "react-router-dom";
 import apiClient from "../utils/api-client";
 
-const SingleProduct = () => {
+const SingleProduct = ({ addToCart }) => {
+  const [count, setCount] = useState(0);
   const [pic, setPic] = useState("");
 
   const [products, setProducts] = useState([]);
@@ -27,6 +28,7 @@ const SingleProduct = () => {
     fetchProducts();
   }, []);
 
+  const disableBTN = count === 0 ? true : false;
   return (
     <section className="align_center single_product">
       <div className="align_center">
@@ -74,15 +76,19 @@ const SingleProduct = () => {
 
         <h2 className="quantity_title">Quantity:</h2>
         <div className="align_center quanitity_input">
-          <QuantityCount />
+          <QuantityCount count={count} setCount={setCount} />
         </div>
 
-        <button className="searh_button add_cart">Add to cart</button>
+        <button
+          disabled={disableBTN}
+          className="searh_button add_cart"
+          onClick={() => addToCart(singleProductArray[0], count)} // This takes the 'product' and 'count' (from quantityCount componenet)
+        >
+          Add to cart
+        </button>
       </div>
     </section>
   );
 };
 
 export default SingleProduct;
-
-//CODE WORKS GREAT

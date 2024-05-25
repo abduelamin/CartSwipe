@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 import "../styles/ProductCard.css";
 
 import { NavLink, useParams } from "react-router-dom";
+import cartContext from "../Contexts/cartContext";
+import { addToCartAPI } from "./../services/CartServices";
 
 const ProductCard = ({ product }) => {
+  const { addToCart } = useContext(cartContext);
+
   return (
     <article className="product_card">
       <div className="product_image">
@@ -40,6 +44,7 @@ const ProductCard = ({ product }) => {
                 fontSize: "200%",
                 color: "#fff",
               }}
+              onClick={() => addToCart(product, 1)}
             />
           </button>
         </footer>

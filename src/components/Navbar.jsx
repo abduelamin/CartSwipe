@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import "../styles/Navbar.css";
 import { NavLink } from "react-router-dom";
 
-const Navbar = ({ user }) => {
-  // You will need to move this as a prop so that we can use statefunction when users clicks on add item
-  const [cartCount, setCartCount] = useState(0);
-
+const Navbar = ({ user, cartLength, cartQuantityFromAPI }) => {
   return (
     <nav className="navbar align_center">
       <div className="align_center">
@@ -41,8 +38,14 @@ const Navbar = ({ user }) => {
             <NavLink to="/myorders">My Orders</NavLink>
             <NavLink className="cart" to="/cart">
               Cart
-              {cartCount ? (
-                <div className="cart_items align_center ">{cartCount}</div>
+              {/* Im trying to have the cart nmuber to be shown all times*/}
+              {/* {cartQuantityFromAPI.length ? (
+                <div className="cart_items align_center ">
+                  {cartQuantityFromAPI.length}
+                </div>
+              ) :  */}
+              {cartLength ? (
+                <div className="cart_items align_center ">{cartLength}</div>
               ) : null}
             </NavLink>
           </>

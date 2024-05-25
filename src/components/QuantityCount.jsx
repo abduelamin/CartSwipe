@@ -1,27 +1,39 @@
 import React, { useState } from "react";
 import "../styles/QuantityCount.css";
-const QuantityCount = () => {
-  const [count, setCount] = useState(0);
+const QuantityCount = ({
+  count,
+  setCount,
+  quantity,
+  updateCartQuantity,
+  productID,
+  cartPage,
+}) => {
+  // const [count, setCount] = useState(0);
 
   const handleIncrease = () => {
-    setCount((prev) => prev + 1);
+    cartPage
+      ? updateCartQuantity("increase", productID)
+      : setCount((prev) => prev + 1);
   };
 
   const handleDecrease = () => {
-    setCount((prev) => prev - 1);
+    cartPage
+      ? updateCartQuantity("decrease", productID)
+      : setCount((prev) => prev - 1);
   };
+
+  const isDecrementDisabled = cartPage ? quantity <= 1 : count <= 0;
+
   return (
     <>
-      {!count ? (
-        <button className="quantity_input_button" disabled>
-          -
-        </button>
-      ) : (
-        <button onClick={handleDecrease} className="quantity_input_button">
-          -
-        </button>
-      )}
-      <p className="quantity_input_count">{count}</p>
+      <button
+        onClick={handleDecrease}
+        className="quantity_input_button"
+        disabled={isDecrementDisabled}
+      >
+        -
+      </button>
+      <p className="quantity_input_count">{cartPage ? quantity : count}</p>
       <button onClick={handleIncrease} className="quantity_input_button">
         +
       </button>

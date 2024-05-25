@@ -1,0 +1,2 @@
+// Bugs to fix
+// There is a bug whereby my console.headpones,watches dont have their product card.

@@ -9,5 +9,5 @@ export const signUp = async (user, profileImage) => {
   userData.append("deliveryAddress", user.deliveryAddress);
   userData.append("profilePic", profileImage);
 
-  await api.post("/user/signup", userData);
+  return await api.post("/user/signup", userData);
 };
