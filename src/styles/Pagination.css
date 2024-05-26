@@ -1,3 +1,31 @@
+/* .pagination {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 1em;
+}
+
+.pagination_button {
+  width: 3.3em;
+  height: 3.3em;
+  margin: 0 10px;
+  font-size: 1em;
+  font-weight: 600;
+  border: 1px solid #e5e5e5;
+  border-radius: 0.45em;
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+
+.currentPage {
+  background-color: #000;
+  color: #fff;
+}
+ */
+
 .pagination {
   list-style: none;
   display: flex;
@@ -23,4 +51,12 @@
 .currentPage {
   background-color: #000;
   color: #fff;
+}
+
+@media (max-width: 480px) {
+  .pagination_button {
+    width: 2.5em;
+    height: 2.5em;
+    font-size: 0.8em;
+  }
 }

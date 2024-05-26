@@ -17,7 +17,7 @@ const Homepage = () => {
       <HeroSection
         title="Sleek Tech Essentials"
         subtitle="Craft Your Productivity Oasis with Our Selection of Tech and Accessories"
-        image={workstation}
+        image={iphone14}
         link="/products?category=Laptops"
       />
     </div>
