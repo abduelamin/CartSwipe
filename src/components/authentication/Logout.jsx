@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "../../styles/Logout.css";
+// import "../../styles/Logout.css";
 
 const Logout = () => {
   useEffect(() => {
