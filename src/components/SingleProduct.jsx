@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/SingleProduct.css";
-
+import config from "../config.json";
 import QuantityCount from "./QuantityCount";
 import { useParams } from "react-router-dom";
 import apiClient from "../utils/api-client";
@@ -50,7 +50,7 @@ const SingleProduct = ({ addToCart }) => {
             singleProductArray[0].images.map((image, index) => (
               <img
                 key={index}
-                src={`http://localhost:5000/products/${image}`}
+                src={`${config.backendURL}/products/${image}`}
                 alt={image}
                 className={pic === image ? "selected_image" : null}
                 onClick={() => setPic(image)}
@@ -61,7 +61,7 @@ const SingleProduct = ({ addToCart }) => {
           <img
             src={
               pic
-                ? `http://localhost:5000/products/${pic}`
+                ? `${config.backendURL}/products/${pic}`
                 : `http://localhost:5000/products/${singleProductArray[0].images[0]}`
             }
             alt={singleProductArray[0].images[0]}

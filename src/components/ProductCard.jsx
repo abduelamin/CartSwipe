@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 import "../styles/ProductCard.css";
-
+import config from "../config.json";
 import { NavLink } from "react-router-dom";
 import cartContext from "../Contexts/cartContext";
 
@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => {
       <div className="product_image">
         <NavLink to={`/product/${product.title}`}>
           <img
-            src={`http://localhost:5000/products/${product.images[0]}`}
+            src={`${config.backendURL}/products/${product.images[0]}`}
             alt="product image"
           />
         </NavLink>

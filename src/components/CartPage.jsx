@@ -9,7 +9,7 @@ import cartContext from "../Contexts/cartContext";
 import { checkoutAPI } from "../services/CheckOut";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import config from "../config.json";
 const CartPage = () => {
   const [subTotal, setSubTotal] = useState(0);
   const userObj = useContext(userContext);
