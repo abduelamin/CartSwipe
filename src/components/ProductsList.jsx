@@ -4,8 +4,10 @@ import ProductCard from "./ProductCard";
 import api from "../utils/api-client";
 import { useSearchParams } from "react-router-dom";
 import Pagination from "./Pagination";
+import LoadingSpinner from "./Loading";
 
 const ProductsList = () => {
+  const [loading, setLoading] = useState(true);
   // This is access products server which gives details about all products i.e. total products, products themselves etc.. This is mainly used for our pagination component to determine the total products counts
   const [mainDataObject, setMainDataObject] = useState("");
 
@@ -36,6 +38,8 @@ const ProductsList = () => {
         setMainDataObject(response.data);
       } catch (err) {
         setError(err.message);
+      } finally {
+        setLoading(false);
       }
     };
     fetchProducts();
@@ -55,9 +59,13 @@ const ProductsList = () => {
       </header>
       <div className="products_list">
         {error && <em className="form_error">{error}</em>}
-        {products.map((product) => {
-          return <ProductCard product={product} key={product._id} />;
-        })}
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          products.map((product) => {
+            return <ProductCard product={product} key={product._id} />;
+          })
+        )}
       </div>
 
       {mainDataObject && (

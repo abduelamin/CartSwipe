@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => {
       <div className="product_image">
         <NavLink to={`/product/${product.title}`}>
           <img
-            src={`${config.backendURL}/products/${product.images[0]}`}
+            src={`https://cartswipe-backend.onrender.com/products/${product.images[0]}`}
             alt="product image"
           />
         </NavLink>

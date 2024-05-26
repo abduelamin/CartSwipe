@@ -31,6 +31,7 @@
     "react-hook-form": "^7.43.9",
     "react-router-dom": "^6.22.3",
     "react-toastify": "^10.0.5",
+    "styled-components": "^6.1.11",
     "zod": "^3.21.4"
   },
   "devDependencies": {

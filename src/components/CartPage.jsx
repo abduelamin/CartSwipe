@@ -10,6 +10,8 @@ import { checkoutAPI } from "../services/CheckOut";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import config from "../config.json";
+import apiClient from "../utils/api-client";
+
 const CartPage = () => {
   const [subTotal, setSubTotal] = useState(0);
   const userObj = useContext(userContext);
@@ -40,7 +42,7 @@ const CartPage = () => {
     <section className="align_center cart_page">
       <div className="align_center user_info">
         <img
-          src={`http://localhost:5000/profile/${userObj?.profilePic}`}
+          src={`https://cartswipe-backend.onrender.com/profile/${userObj?.profilePic}`}
           alt="user profile"
         />
         <div>

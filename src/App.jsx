@@ -170,12 +170,12 @@ const App = () => {
                     setCount={setCount}
                   />
                 }
-              />
-              <Route path="/myOrders" element={<MyOrder />} />
+              />{" "}
+              <Route path="/signUp" element={<SignupPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route element={<ProtectedPages user={user} />}>
-                <Route path="/signUp" element={<SignupPage />} />
                 <Route path="/logout" element={<Logout />} />
+                <Route path="/myOrders" element={<MyOrder />} />
                 <Route
                   path="/cart"
                   element={
