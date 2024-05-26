@@ -32,6 +32,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
   const [count, setCount] = useState(0);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     try {

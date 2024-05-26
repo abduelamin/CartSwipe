@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/SingleProduct.css";
 
-import product from "../../sampleproduct";
 import QuantityCount from "./QuantityCount";
 import { useParams } from "react-router-dom";
 import apiClient from "../utils/api-client";
@@ -20,7 +19,20 @@ const SingleProduct = ({ addToCart }) => {
     const fetchProducts = async () => {
       try {
         const response = await apiClient.get("/products");
-        setProducts(response.data.products);
+        const response2 = await apiClient.get("/products", {
+          params: { page: 2 },
+        });
+        const response3 = await apiClient.get("/products", {
+          params: { page: 3 },
+        });
+
+        const fullProductList = [
+          ...response.data.products,
+          ...response2.data.products,
+          ...response3.data.products,
+        ];
+        // console.log(fullProductList);
+        setProducts(fullProductList);
       } catch (err) {
         console.error(err.message);
       }
@@ -28,7 +40,8 @@ const SingleProduct = ({ addToCart }) => {
     fetchProducts();
   }, []);
 
-  const disableBTN = count === 0 ? true : false;
+  // Try this, grab all the prodcuts from each page speararelty, join them to an array and then filter that array.
+
   return (
     <section className="align_center single_product">
       <div className="align_center">
@@ -80,7 +93,6 @@ const SingleProduct = ({ addToCart }) => {
         </div>
 
         <button
-          disabled={disableBTN}
           className="searh_button add_cart"
           onClick={() => addToCart(singleProductArray[0], count)} // This takes the 'product' and 'count' (from quantityCount componenet)
         >

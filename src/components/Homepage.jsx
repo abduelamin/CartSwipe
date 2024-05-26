@@ -11,14 +11,14 @@ const Homepage = () => {
         title="Elevate Your Digital Ecosystem"
         subtitle="Unlock Endless Possibilities: Dive Into Our Selection of Apple Products and Beyond"
         image={iphone14}
-        link="/"
+        link="/products?category=SmartPhones"
       />
       <FeaturedProducts />
       <HeroSection
         title="Sleek Tech Essentials"
         subtitle="Craft Your Productivity Oasis with Our Selection of Tech and Accessories"
         image={workstation}
-        link="/"
+        link="/products?category=Laptops"
       />
     </div>
   );

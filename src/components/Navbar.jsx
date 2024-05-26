@@ -1,19 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/Navbar.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
-const Navbar = ({ user, cartLength, cartQuantityFromAPI }) => {
+const Navbar = ({ user, cartLength }) => {
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (search.trim() !== "") {
+      navigate(`/products?search=${search.trim()}`);
+    }
+  };
+
   return (
     <nav className="navbar align_center">
       <div className="align_center">
         <NavLink to="/">
           <h1 className="navbar_heading">CartSwipe</h1>
         </NavLink>
-        <form className="navbar_form align_center">
+        <form className="navbar_form align_center" onSubmit={handleSubmit}>
           <input
             type="text"
             className="navbar_search"
             placeholder="Search Products"
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
           />
           <button type="submit" className="search_button">
             Search

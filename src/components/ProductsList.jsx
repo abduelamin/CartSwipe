@@ -18,6 +18,8 @@ const ProductsList = () => {
   const getParam = searchParams.get("category");
   const page = searchParams.get("page");
 
+  const searchQuery = searchParams.get("search");
+
   const handlePageChange = (page) => {
     const currentQueryURL = Object.fromEntries([...searchParams]);
     setSearchParams({ ...currentQueryURL, page: page });
@@ -27,8 +29,9 @@ const ProductsList = () => {
     const fetchProducts = async () => {
       try {
         const response = await api.get("/products", {
-          params: { category: getParam, page: page },
+          params: { search: searchQuery, category: getParam, page: page },
         });
+
         setProducts(response.data.products);
         setMainDataObject(response.data);
       } catch (err) {
@@ -36,7 +39,7 @@ const ProductsList = () => {
       }
     };
     fetchProducts();
-  }, [getParam, page]);
+  }, [getParam, page, searchQuery]);
 
   return (
     <section className="products_list_section">
